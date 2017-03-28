@@ -7,20 +7,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SheetComponent } from './sheet/sheet.component';
+import {MaterialModule} from "@angular/material";
+import {ApiService} from "./api.service";
+import {LoginService} from "./login.service";
+import {ConfigurationService} from "./configuration.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    SheetComponent,
     SheetComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterialModule
   ],
-  providers: [],
+  providers: [ApiService, LoginService, ConfigurationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

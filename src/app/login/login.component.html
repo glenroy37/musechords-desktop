@@ -1,3 +1,20 @@
-<p>
-  login works!
-</p>
+<div class="centered-v-h">
+  <div id="row">
+    <md-input-container>
+      <input mdInput placeholder="Username" #username />
+    </md-input-container>
+  </div>
+  <div id="row">
+    <md-input-container>
+      <input mdInput placeholder="Password" type="password" #password />
+    </md-input-container>
+  </div>
+  <div id="row">
+    <md-input-container>
+      <input mdInput placeholder="API-URL" type="text" [value]="apiUrl" #apiUrl />
+    </md-input-container>
+  </div>
+  <div id="row">
+    <button md-raised-button (click)="login(username, password, apiUrl)">Login</button>
+  </div>
+</div>
