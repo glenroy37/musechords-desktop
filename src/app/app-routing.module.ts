@@ -8,13 +8,13 @@ const routes: Routes = [
     path: '', component: LoginComponent
   },
   {
-    path: 'sheets', component: SheetComponent, canActivate: [LoginComponent]
+    path: 'sheets', component: SheetComponent
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [SheetComponent]
 })
 export class AppRoutingModule { }

@@ -7,15 +7,11 @@ export class ConfigurationService {
 
   configuration: Object = {};
 
+
   constructor() {
-    fs.exists('config.json', (exists) =>{
-      if(exists){
-        fs.readFile('config.json', (err, data) => {
-          if(err) throw err;
-          this.configuration = JSON.parse(data);
-        });
-      }
-    });
+    if(fs.existsSync('config.json')){
+        this.configuration = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+    }
   }
 
   write(key: string, value: string): void {
@@ -30,7 +26,9 @@ export class ConfigurationService {
   }
 
   read(key): string{
-    return this.configuration[key]
+    return this.configuration[key];
   }
+
+
 
 }

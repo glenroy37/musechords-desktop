@@ -17,8 +17,6 @@ export class ApiService {
     if(this.apiUrl == null){
       if(this.configurationService.exists(ApiService.configKey)){
         this.apiUrl = this.configurationService.read(ApiService.configKey);
-      } else {
-        this.apiUrl = "";
       }
     }
     return this.apiUrl;

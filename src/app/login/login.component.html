@@ -1,20 +1,20 @@
 <div class="centered-v-h">
   <div id="row">
     <md-input-container>
-      <input mdInput placeholder="Username" #username />
+      <input mdInput placeholder="Username" #usernameInput />
     </md-input-container>
   </div>
   <div id="row">
     <md-input-container>
-      <input mdInput placeholder="Password" type="password" #password />
+      <input mdInput placeholder="Password" type="password" #passwordInput />
     </md-input-container>
   </div>
   <div id="row">
     <md-input-container>
-      <input mdInput placeholder="API-URL" type="text" [value]="apiUrl" #apiUrl />
+      <input mdInput placeholder="API-URL" type="text" [value]="getApiUrl()" #apiUrlInput />
     </md-input-container>
   </div>
   <div id="row">
-    <button md-raised-button (click)="login(username, password, apiUrl)">Login</button>
+    <button md-raised-button (click)="login(usernameInput.value, passwordInput.value, apiUrlInput.value)">Login</button>
   </div>
 </div>

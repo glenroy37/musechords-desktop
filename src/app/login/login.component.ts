@@ -24,11 +24,17 @@ export class LoginComponent implements OnInit {
     if(apiUrl != this.apiUrl){
       this.apiService.setApiUrl(apiUrl);
     }
-    this.loginService.login(username, password).subscribe(res => {
-      if(res["token"] != null){
-        this.router.navigate(["/sheets"]);
-      }
-    });
+    if(username == "" || password == ""){
+      alert("Please enter username and password");
+    } else {
+      this.loginService.login(username, password).subscribe(res => {
+        if (res["token"] != null) {
+          this.router.navigate(["/sheets"]);
+        }
+      });
+    }
   }
-
+  getApiUrl(): string{
+    return this.apiUrl;
+  }
 }

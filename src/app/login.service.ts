@@ -17,7 +17,6 @@ export class LoginService {
   login(username: string, password: string): Observable<JSON> {
     let observable: Observable<JSON> =  this.http.post(this.apiService.getApiUrl()+"/token",
       {username: username, password: password}).map((response: Response)=> response.json());
-
     observable.subscribe(res => {
       if(res["token"] == null){
         throw new Error("Invalid Response from Server");
