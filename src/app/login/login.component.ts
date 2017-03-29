@@ -20,20 +20,23 @@ export class LoginComponent implements OnInit {
     this.apiUrl = this.apiService.getApiUrl();
   }
 
-  login(username: string, password: string, apiUrl: string){
+  login(username: string, password: string, apiUrl: string): void{
     if(apiUrl != this.apiUrl){
       this.apiService.setApiUrl(apiUrl);
     }
     if(username == "" || password == ""){
       alert("Please enter username and password");
     } else {
-      this.loginService.login(username, password).subscribe(res => {
-        if (res["token"] != null) {
-          this.router.navigate(["/sheets"]);
-        }
+      this.loginService.login(username, password).then(() => {
+          this.router.navigateByUrl("/sheets/0");
       });
     }
   }
+
+  continueOffline(): void{
+    this.router.navigateByUrl("/sheets/1");
+  }
+
   getApiUrl(): string{
     return this.apiUrl;
   }

@@ -14,16 +14,19 @@ export class LoginService {
     return this.token;
   }
 
-  login(username: string, password: string): Observable<JSON> {
-    let observable: Observable<JSON> =  this.http.post(this.apiService.getApiUrl()+"/token",
-      {username: username, password: password}).map((response: Response)=> response.json());
-    observable.subscribe(res => {
-      if(res["token"] == null){
-        throw new Error("Invalid Response from Server");
-      }
-      this.token = res["token"];
+  login(username: string, password: string): Promise<string> {
+    let promise = new Promise<string>((resolve) => {
+      this.http.post(this.apiService.getApiUrl()+"/token", {username: username, password: password})
+        .map((response: Response)=> response.json()).subscribe(res => {
+        if(res["token"] == null){
+          throw new Error("Invalid Response from Server");
+        }
+        ApiService.headers.append('token', res["token"]);
+        this.token = res["token"];
+        resolve(this.token);
+      });
     });
-    return observable;
+    return promise;
   }
 
 

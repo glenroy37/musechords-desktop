@@ -11,6 +11,7 @@ import {ApiService} from "./api.service";
 import {LoginService} from "./login.service";
 import {ConfigurationService} from "./configuration.service";
 import {SheetComponent} from "./sheet/sheet.component";
+import {SheetService} from "./sheet.service";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import {SheetComponent} from "./sheet/sheet.component";
     AppRoutingModule,
     MaterialModule
   ],
-  providers: [ApiService, LoginService, ConfigurationService],
+  providers: [ApiService, LoginService, ConfigurationService, SheetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

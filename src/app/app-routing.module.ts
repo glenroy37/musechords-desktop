@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '', component: LoginComponent
   },
   {
-    path: 'sheets', component: SheetComponent
+    path: 'sheets/:offline', component: SheetComponent
   }
 ];
 

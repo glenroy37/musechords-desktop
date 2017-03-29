@@ -1,3 +1,17 @@
-<p>
-  sheet works!
-</p>
+<div class="stretched">
+  <div class="row"></div>
+  <div class="row">
+    <div class="col-md-3">
+      <md-nav-list>
+        <md-list-item *ngFor="let sheet of sheets">
+          <button md-button (click)="showSheet(sheet)">
+            {{sheet.author}} - {{sheet.title}}
+          </button>
+        </md-list-item>
+      </md-nav-list>
+    </div>
+    <div class="col-md-9">
+
+    </div>
+  </div>
+</div>
