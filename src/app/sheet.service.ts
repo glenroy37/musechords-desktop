@@ -38,10 +38,10 @@ export class SheetService {
   }
 
   async newSheet(sheet: Sheet): Promise<any>{
-    if(this.offline){
+    if(this.offline == true){
       return null;
     } else {
-      await this.http.post(this.apiService.getApiUrl()+"/sheets", {headers: ApiService.headers}).map(res=>res.json()).subscribe(sheet=>{
+      await this.http.post(this.apiService.getApiUrl()+"/sheets", JSON.stringify(sheet), {headers: ApiService.headers}).map(res=>res.json()).subscribe(sheet=>{
         this.sheets.push(sheet);
       });
     }

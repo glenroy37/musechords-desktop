@@ -12,6 +12,7 @@ import {LoginService} from "./login.service";
 import {ConfigurationService} from "./configuration.service";
 import {SheetComponent} from "./sheet/sheet.component";
 import {SheetService} from "./sheet.service";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {SheetService} from "./sheet.service";
     FormsModule,
     HttpModule,
     AppRoutingModule,
+    CommonModule,
     MaterialModule
   ],
   providers: [ApiService, LoginService, ConfigurationService, SheetService],

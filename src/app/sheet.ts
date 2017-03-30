@@ -6,4 +6,10 @@ export class Sheet {
   public timesig?: string;
   public transpose?: number;
   public lyrics: string;
+
+  constructor(author: string = "", title: string = "", lyrics:string = ""){
+    this.author = author;
+    this.title = title;
+    this.lyrics = lyrics;
+  }
 }

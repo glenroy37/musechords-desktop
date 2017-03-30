@@ -1,17 +1,38 @@
 <div class="stretched">
-  <div class="row"></div>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+      <div class="col-md-2">
+        <md-input-container>
+          <input mdInput placeholder="Title" [value]="selectedSheet.title" type="text" #title />
+        </md-input-container>
+      </div>
+      <div class="col-md-2">
+        <md-input-container>
+          <input mdInput placeholder="Author" [value]="selectedSheet.author" type="text" #author />
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
       <md-nav-list>
-        <md-list-item *ngFor="let sheet of sheets">
-          <button md-button (click)="showSheet(sheet)">
+        <md-list-item *ngFor="let sheet of sheets" (click)="showSheet(sheet)">
             {{sheet.author}} - {{sheet.title}}
-          </button>
+        </md-list-item>
+        <md-list-item (click) = "newSheet()">
+          Create New Sheet
         </md-list-item>
       </md-nav-list>
     </div>
-    <div class="col-md-9">
-
+    <div class="col-md-8" id="sheetInputWrapper">
+      <textarea id="sheetInput" class="form-control" rows="25" [value]="selectedSheet.lyrics" #lyrics></textarea>
+    </div>
+    <div class="col-md-2" id="editOptionsWrapper">
+      <div id="row">
+        <button md-raised-button (click)="saveSheet(author.value, title.value, lyrics.value)">Save Sheet</button>
+      </div>
     </div>
   </div>
 </div>

@@ -2,3 +2,27 @@
   width: 100%;
   height: 100%;
 }
+
+#sheetInput{
+  width:90%;
+  height:100%;
+  margin-top:2%;
+  -webkit-flex: 1;
+  box-sizing:border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+#editOptionsWrapper{
+  margin-top:2%;
+  height:100%;
+}
+
+#sheetInputWrapper{
+  display: -webkit-flex;
+  min-height: 400px;
+}
+
+div{
+  margin:0;
+}

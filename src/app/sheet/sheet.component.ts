@@ -25,6 +25,7 @@ export class SheetComponent implements OnInit, OnDestroy {
          this.reloadSheets();
       });
     });
+    this.newSheet();
   }
 
   ngOnDestroy() {
@@ -35,8 +36,12 @@ export class SheetComponent implements OnInit, OnDestroy {
     this.selectedSheet = sheet;
   }
 
-  newSheet(sheet: Sheet): void{
-    this.sheetService.newSheet(sheet).then(any => {
+  newSheet(): void{
+    this.selectedSheet = new Sheet();
+  }
+
+  saveSheet(author: string, title: string, lyrics: string): void{
+    this.sheetService.newSheet(new Sheet(author, title, lyrics)).then(any => {
       this.reloadSheets();
     });
   }
