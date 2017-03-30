@@ -28,8 +28,8 @@ export class SheetService {
   };
   private static transposeCycleDown: Object = {
     "C":"B",
-    "Cb":"C",
-    "D":"Cb",
+    "Db": "C",
+    "D":"Db",
     "Eb":"D",
     "E":"Eb",
     "F":"E",
