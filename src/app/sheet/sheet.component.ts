@@ -50,4 +50,14 @@ export class SheetComponent implements OnInit, OnDestroy {
     this.sheets = this.sheetService.getSheets();
   }
 
+  transposeUp(lyrics:string): void{
+    this.selectedSheet.lyrics = this.sheetService.transposeUp(lyrics);
+  }
+
+  transposeDown(lyrics: string): void{
+    this.selectedSheet.lyrics = this.sheetService.transposeDown(lyrics);
+  }
+
+
+
 }

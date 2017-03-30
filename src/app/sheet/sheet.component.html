@@ -33,6 +33,13 @@
       <div id="row">
         <button md-raised-button (click)="saveSheet(author.value, title.value, lyrics.value)">Save Sheet</button>
       </div>
+      <div id="row" class="editOptionsItem">
+        Transpose:
+      </div>
+      <div id="row">
+        <button md-raised-button (click)="transposeUp(lyrics.value)">+</button>
+        <button md-raised-button (click)="transposeDown(lyrics.value)">-</button>
+      </div>
     </div>
   </div>
 </div>

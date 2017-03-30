@@ -11,5 +11,6 @@ export class Sheet {
     this.author = author;
     this.title = title;
     this.lyrics = lyrics;
+    this.transpose = 0;
   }
 }
