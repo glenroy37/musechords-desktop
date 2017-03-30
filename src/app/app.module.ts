@@ -13,6 +13,7 @@ import {ConfigurationService} from "./configuration.service";
 import {SheetComponent} from "./sheet/sheet.component";
 import {SheetService} from "./sheet.service";
 import {CommonModule} from "@angular/common";
+import {SheetFileService} from "./sheet-file.service";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {CommonModule} from "@angular/common";
     CommonModule,
     MaterialModule
   ],
-  providers: [ApiService, LoginService, ConfigurationService, SheetService],
+  providers: [ApiService, LoginService, ConfigurationService, SheetService, SheetFileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

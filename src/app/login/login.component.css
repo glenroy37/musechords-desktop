@@ -8,3 +8,11 @@
   max-width: 400px;
   padding: 60px;
 }
+
+#offlineButton{
+  margin-left:2%;
+}
+
+.loginInput{
+  min-width:200px;
+}

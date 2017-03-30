@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  continueOffline(): void{
+  offline(): void {
     this.router.navigateByUrl("/sheets/1");
   }
 

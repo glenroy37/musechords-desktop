@@ -3,6 +3,7 @@ import {Http} from "@angular/http";
 import {Sheet} from "./sheet";
 import {LoginService} from "./login.service";
 import {ApiService} from "./api.service";
+import {SheetFileService} from "./sheet-file.service";
 
 declare let fs: any;
 
@@ -13,24 +14,23 @@ export class SheetService {
   private offline: boolean;
 
   constructor(private http: Http,
-              private apiService: ApiService) { }
+              private apiService: ApiService,
+              private sheetFileService: SheetFileService) { }
 
   async init(offline: boolean): Promise<any>{
-    this.offline = offline;
-    if(offline == true){
-      if(!fs.existsSync("muse.chords")){
-        this.sheets = [];
-        return null;
+    return new Promise<any>((resolve) => {
+      if (offline == true) {
+        this.sheets = this.sheetFileService.loadSheetsFromDisk();
+        resolve(null);
       } else {
-        this.sheets = JSON.parse(fs.readFileSync("muse.chords", "utf-8"));
-        return null;
+        this.http.get(this.apiService.getApiUrl() + "/sheets", {headers: ApiService.headers})
+          .map(res => res.json()).subscribe(sheets =>{
+            this.sheets = sheets;
+            resolve(null);
+            this.sheetFileService.writeSheetsToDisk(this.sheets);
+          });
       }
-    } else {
-      await this.http.get(this.apiService.getApiUrl()+"/sheets", {headers: ApiService.headers})
-        .map(res => res.json()).subscribe(sheets =>
-          this.sheets = sheets
-        );
-    }
+    });
   }
 
   getSheets(): Array<Sheet>{
@@ -43,6 +43,7 @@ export class SheetService {
     } else {
       await this.http.post(this.apiService.getApiUrl()+"/sheets", JSON.stringify(sheet), {headers: ApiService.headers}).map(res=>res.json()).subscribe(sheet=>{
         this.sheets.push(sheet);
+        this.sheetFileService.writeSheetsToDisk(this.sheets);
       });
     }
   }

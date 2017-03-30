@@ -1,20 +1,21 @@
 <div class="centered-v-h">
-  <div id="row">
+  <div class="row">
     <md-input-container>
-      <input mdInput placeholder="Username" #usernameInput />
+      <input mdInput class="loginInput" placeholder="Username" #usernameInput />
     </md-input-container>
   </div>
-  <div id="row">
+  <div class="row">
     <md-input-container>
-      <input mdInput placeholder="Password" type="password" #passwordInput />
+      <input mdInput class="loginInput" placeholder="Password" type="password" #passwordInput />
     </md-input-container>
   </div>
-  <div id="row">
+  <div class="row">
     <md-input-container>
-      <input mdInput placeholder="API-URL" type="text" [value]="getApiUrl()" #apiUrlInput />
+      <input mdInput class="loginInput" placeholder="API-URL" type="text" [value]="getApiUrl()" #apiUrlInput />
     </md-input-container>
   </div>
-  <div id="row">
+  <div class="row">
     <button md-raised-button (click)="login(usernameInput.value, passwordInput.value, apiUrlInput.value)">Login</button>
+    <button id="offlineButton" md-raised-button (click)="offline()">Use Offline</button>
   </div>
 </div>
