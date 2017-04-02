@@ -10,7 +10,7 @@ export class ConfigurationService {
 
   constructor() {
     if(fs.existsSync(ConfigurationService.filename)){
-        this.configuration = JSON.parse(fs.readFileSync('/Users/mathias/config.json', 'utf8'));
+        this.configuration = JSON.parse(fs.readFileSync(ConfigurationService.filename, 'utf8'));
     } else {
       this.write("apiUrl", "");
     }
