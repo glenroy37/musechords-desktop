@@ -21,7 +21,7 @@
         <md-list-item *ngFor="let sheet of sheets" (click)="showSheet(sheet)">
             {{sheet.author}} - {{sheet.title}}
         </md-list-item>
-        <md-list-item (click) = "newSheet()">
+        <md-list-item (click) = "newSheet()" *ngIf="offline == false">
           Create New Sheet
         </md-list-item>
       </md-nav-list>

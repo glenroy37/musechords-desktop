@@ -20,7 +20,7 @@ export class SheetComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscriptionToParameter = this.route.params.subscribe(params => {
-      this.offline = params["offline"];
+      this.offline = (params["offline"] == "true");
       this.sheetService.init(this.offline).then(()=>{
          this.reloadSheets();
       });
@@ -41,6 +41,10 @@ export class SheetComponent implements OnInit, OnDestroy {
   }
 
   saveSheet(author: string, title: string, lyrics: string): void{
+    if(this.offline == true){
+      alert("You cannot edit Sheets while you are offline");
+      return;
+    }
     if(!this.selectedSheet.id) {
       this.sheetService.newSheet(new Sheet(author, title, lyrics)).then(() => {
         this.reloadSheets();
@@ -75,7 +79,4 @@ export class SheetComponent implements OnInit, OnDestroy {
   transposeDown(lyrics: string): void{
     this.selectedSheet.lyrics = this.sheetService.transposeDown(lyrics);
   }
-
-
-
 }

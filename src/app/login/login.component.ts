@@ -28,13 +28,13 @@ export class LoginComponent implements OnInit {
       alert("Please enter username and password");
     } else {
       this.loginService.login(username, password).then(() => {
-          this.router.navigateByUrl("/sheets/0");
+          this.router.navigateByUrl("/sheets/false");
       });
     }
   }
 
   offline(): void {
-    this.router.navigateByUrl("/sheets/1");
+    this.router.navigateByUrl("/sheets/true");
   }
 
   getApiUrl(): string{

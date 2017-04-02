@@ -152,6 +152,7 @@ export class SheetService {
         this.sheets[this.sheets.findIndex((element) => {
           return element.id == sheet.id;
         })] = sheet;
+        this.sheetFileService.writeSheetsToDisk(this.sheets);
       });
     }
   }
@@ -162,6 +163,7 @@ export class SheetService {
     } else {
       await this.http.delete(this.apiService.getApiUrl() + "/sheets/" + sheet.id, {headers: ApiService.headers}).map(res => res.json()).subscribe(() => {
         this.sheets.splice(this.sheets.indexOf(sheet));
+        this.sheetFileService.writeSheetsToDisk(this.sheets);
       });
     }
   }
