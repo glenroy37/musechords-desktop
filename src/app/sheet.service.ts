@@ -4,6 +4,7 @@ import {Sheet} from "./sheet";
 import {LoginService} from "./login.service";
 import {ApiService} from "./api.service";
 import {SheetFileService} from "./sheet-file.service";
+import TransposeCycle from "./TransposeCycle";
 
 declare let fs: any;
 
@@ -12,53 +13,12 @@ export class SheetService {
 
   private sheets: Array<Sheet>;
   private offline: boolean;
-  private static transposeCycleUp: Object = {
-    "C": "C#",
-    "C#": "D",
-    "D": "D#",
-    "D#": "E",
-    "E": "F",
-    "F": "F#",
-    "F#": "G",
-    "G": "G#",
-    "G#": "A",
-    "A": "A#",
-    "A#": "B",
-    "B": "C",
-  };
-  private static transposeCycleDown: Object = {
-    "C":"B",
-    "Db": "C",
-    "D":"Db",
-    "Eb":"D",
-    "E":"Eb",
-    "F":"E",
-    "Gb":"F",
-    "G":"Gb",
-    "Ab":"G",
-    "A":"Ab",
-    "Bb":"A",
-    "B":"Bb"
-  };
-
-  private static enharmonicEquivalents: Object = {
-    "C#": "Db",
-    "Db": "C#",
-    "D#": "Eb",
-    "Eb": "D#",
-    "F#": "Gb",
-    "Gb": "F#",
-    "G#": "Ab",
-    "Ab": "G#",
-    "A#": "Bb",
-    "Bb": "A#"
-  };
 
   constructor(private http: Http,
               private apiService: ApiService,
               private sheetFileService: SheetFileService) { }
 
-  async init(offline: boolean): Promise<any>{
+  init(offline: boolean): Promise<any>{
     return new Promise<any>((resolve) => {
       if (offline == true) {
         this.sheets = this.sheetFileService.loadSheetsFromDisk();
@@ -106,7 +66,7 @@ export class SheetService {
           //If the chord is a two-char chord, use the chord, if it's a b-chord, otherwise use the enharmonic equivalent.
           let chord = (twoCharChord == false) ? line.charAt(i) :
             (line.charAt(i+1) == enharmonicChecker) ? line.charAt(i)+line.charAt(i+1)
-              : SheetService.enharmonicEquivalents[line.charAt(i)+line.charAt(i+1)];
+              : TransposeCycle.enharmonicEquivalents[line.charAt(i)+line.charAt(i+1)];
 
           //If chord is a valid, transposable chord
           if(transposeCycle[chord] != null){
@@ -160,24 +120,48 @@ export class SheetService {
     newLines.forEach(line => {
       newLyrics+=line+"\n";
     });
+    //Remove last LF
+    newLyrics = newLyrics.slice(0, -1);
     return newLyrics;
   }
 
   transposeDown(lyrics:string): string{
-    return this.transpose(lyrics, SheetService.transposeCycleDown, "b");
+    return this.transpose(lyrics, TransposeCycle.cycleDown, "b");
   }
 
   transposeUp(lyrics: string): string{
-    return this.transpose(lyrics, SheetService.transposeCycleUp, "#");
+    return this.transpose(lyrics, TransposeCycle.cycleUp, "#");
   }
 
   async newSheet(sheet: Sheet): Promise<any>{
     if(this.offline == true){
       return null;
     } else {
-      await this.http.post(this.apiService.getApiUrl()+"/sheets", JSON.stringify(sheet), {headers: ApiService.headers}).map(res=>res.json()).subscribe(sheet=>{
+      await this.http.post(this.apiService.getApiUrl() + "/sheets", JSON.stringify(sheet), {headers: ApiService.headers}).map(res => res.json()).subscribe(sheet => {
         this.sheets.push(sheet);
         this.sheetFileService.writeSheetsToDisk(this.sheets);
+      });
+    }
+  }
+
+  async saveSheet(sheet: Sheet): Promise<any>{
+    if(this.offline == true){
+      return null;
+    } else {
+      await this.http.put(this.apiService.getApiUrl() + "/sheets/" + sheet.id, JSON.stringify(sheet), {headers: ApiService.headers}).map(res => res.json()).subscribe(affected => {
+        this.sheets[this.sheets.findIndex((element) => {
+          return element.id == sheet.id;
+        })] = sheet;
+      });
+    }
+  }
+
+  async deleteSheet(sheet: Sheet): Promise<any>{
+    if(this.offline == true){
+      return null;
+    } else {
+      await this.http.delete(this.apiService.getApiUrl() + "/sheets/" + sheet.id, {headers: ApiService.headers}).map(res => res.json()).subscribe(() => {
+        this.sheets.splice(this.sheets.indexOf(sheet));
       });
     }
   }

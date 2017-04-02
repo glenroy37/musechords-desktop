@@ -41,7 +41,25 @@ export class SheetComponent implements OnInit, OnDestroy {
   }
 
   saveSheet(author: string, title: string, lyrics: string): void{
-    this.sheetService.newSheet(new Sheet(author, title, lyrics)).then(any => {
+    if(!this.selectedSheet.id) {
+      this.sheetService.newSheet(new Sheet(author, title, lyrics)).then(() => {
+        this.reloadSheets();
+      });
+    } else {
+      this.selectedSheet.author = author;
+      this.selectedSheet.title = title;
+      this.selectedSheet.lyrics = lyrics;
+      this.sheetService.saveSheet(this.selectedSheet).then(() => {
+        this.reloadSheets();
+
+      })
+    }
+  }
+
+  deleteSheet(): void {
+    let toDelete: Sheet = this.selectedSheet;
+    this.newSheet();
+    this.sheetService.deleteSheet(toDelete).then(() => {
       this.reloadSheets();
     });
   }
