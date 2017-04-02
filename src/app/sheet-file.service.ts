@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import {Sheet} from "./sheet";
 
 declare let fs: any;
+declare let homedir: any;
 
 @Injectable()
 export class SheetFileService {
 
-  static filename: string = "mclocal.json";
+  static filename: string = homedir()+"/mclocal.json";
   static encoding: string = "utf8";
   static writeOptions: Object = {encoding: SheetFileService.encoding};
 

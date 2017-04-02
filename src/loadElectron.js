@@ -3,3 +3,4 @@
  */
 var fs = require('fs');
 var electron = require('electron');
+var homedir = require('os-homedir');
