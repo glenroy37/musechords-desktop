@@ -11,7 +11,10 @@
     "electron": "electron .",
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
-    "e2e": "protractor"
+    "e2e": "protractor",
+    "deploy-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=musechords.icns --prune=true --out=release-builds",
+    "deploy-windows": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=musechords.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"MuseChords\"",
+    "deploy-linux" : "electron-packager . --overwrite --platform=linux --arch=x64 --icon=mueschords.png --prune=true --out=release-builds"
   },
   "private": true,
   "dependencies": {

@@ -62,6 +62,10 @@ export class SheetComponent implements OnInit, OnDestroy {
   }
 
   deleteSheet(): void {
+    if(this.offline == true){
+      alert("You cannot delete Sheets while you are offline");
+      return;
+    }
     let toDelete: Sheet = this.selectedSheet;
     this.newSheet();
     this.sheetService.deleteSheet(toDelete).then(() => {
