@@ -1,8 +1,9 @@
+///<reference path="../../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
-import {Sheet} from "../sheet";
-import {SheetService} from "../sheet.service";
+import {Sheet} from "musechords-core/dist/src/sheet";
+import {SheetService} from "musechords-core/dist/src/sheet.service";
 
 @Component({
   selector: 'app-sheet',

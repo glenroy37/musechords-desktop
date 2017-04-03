@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import {IConfigurationService} from "musechords-core/dist/src/IConfigurationService";
 
 declare let fs: any;
 declare let homedir: any;
 @Injectable()
-export class ConfigurationService {
+export class ConfigurationService implements IConfigurationService {
 
   configuration: Object = {};
   static filename: string = homedir()+"/config.json";

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import {Sheet} from "./sheet";
+import {Sheet} from "musechords-core/dist/src/sheet";
+import {ISheetFileService} from "musechords-core/dist/src/ISheetFileService";
 
 declare let fs: any;
 declare let homedir: any;
 
 @Injectable()
-export class SheetFileService {
+export class SheetFileService implements ISheetFileService {
 
   static filename: string = homedir()+"/mclocal.json";
   static encoding: string = "utf8";

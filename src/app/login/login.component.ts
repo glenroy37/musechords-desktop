@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService} from "../api.service";
-import {LoginService} from "../login.service";
 import {Router} from "@angular/router";
+import {LoginService} from "musechords-core/dist/src/login.service";
+import {ApiService} from "musechords-core/dist/src/api.service";
 
 @Component({
   selector: 'app-login',
