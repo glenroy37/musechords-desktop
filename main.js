@@ -16,16 +16,16 @@ app.on('ready', function () {
       slashes: true
     }));
 /*  }else {
-    win.loadURL(process.env.HOST);
-    win.webContents.openDevTools();
-  }*/
+    win.loadURL(process.env.HOST);*/
+    //win.webContents.openDevTools();
+  /*}*/
   win.on('closed', function () {
     win = null;
   });
   var menu = [{
         label: "MuseChords-Desktop",
         submenu: [
-            { label: "About MuesChords", selector: "orderFrontStandardAboutPanel:" },
+            { label: "About MuseChords", selector: "orderFrontStandardAboutPanel:" },
             { type: "separator" },
             { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
         ]}, {

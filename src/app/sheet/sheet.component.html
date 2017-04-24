@@ -16,15 +16,16 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-2 remove-padding">
       <md-nav-list>
         <md-list-item *ngFor="let sheet of sheets" (click)="showSheet(sheet)">
-            {{sheet.author}} - {{sheet.title}}
+            <h4 md-line>{{sheet.author}}</h4>
+            <p md-line>{{sheet.title}}</p>
         </md-list-item>
         <md-list-item (click) = "newSheet()" *ngIf="offline == false">
           Create New Sheet
         </md-list-item>
-      </md-nav-list>
+    </md-nav-list>
     </div>
     <div class="col-md-8" id="sheetInputWrapper">
       <textarea id="sheetInput" class="form-control" rows="25" [value]="selectedSheet.lyrics" #lyrics></textarea>

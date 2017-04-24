@@ -3,6 +3,16 @@
   height: 100%;
 }
 
+.remove-padding
+{
+    padding:0;
+}
+
+.mat-list .mat-list-item .mat-line, .mat-nav-list .mat-list-item .mat-line
+{
+    overflow: hidden;
+}
+
 #sheetInput{
   width:90%;
   height:100%;
